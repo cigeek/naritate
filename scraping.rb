@@ -20,8 +20,10 @@ Amazon::Ecs.options = {
 # Amazon APIからASINを取得
 #
 def getAsin(title)
-    res = Amazon::Ecs.item_search('', {
-        :title => title,
+sleep 0.5
+
+    res = Amazon::Ecs.item_search(title, {
+        #:title => title,
         :search_index => 'DVD',
         :responce_group => 'Small',
         :country => 'jp'}
@@ -88,8 +90,8 @@ end
 
 # 洋画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreignTitles.dat")
+genCode("foreign.dat", "foreignTitles.dat")
+
 # 邦画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japaneseTitles.dat")
-
-genCode("foreign.dat", "foreignTitles.dat")
 genCode("japanese.dat", "japaneseTitles.dat")
