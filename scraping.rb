@@ -6,7 +6,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'amazon/ecs'
 
-# 取得する件数
+# 取得するタイトル数
 MAX_TITLES = 12
 
 # Amazon API接続設定
@@ -21,7 +21,6 @@ Amazon::Ecs.options = {
 #
 def getAsin(title)
     res = Amazon::Ecs.item_search(title, {
-        #:title => title,
         :search_index => 'DVD',
         :responce_group => 'Small',
         :country => 'jp'}
@@ -41,7 +40,7 @@ end
 #
 # 映画タイトルのスクレイピング
 #
-def scrapeTitles(targetURL, fileName)
+def scrapeTitles(targetUrl, fileName)
 
     charset = nil
     html = open(targetURL) do |f|
