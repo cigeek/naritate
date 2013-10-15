@@ -1,0 +1,60 @@
+
+
+<div class="col-sm-6 col-md-4">
+	<div class="thumbnail">
+		<a href="http://www.amazon.co.jp/gp/product/<%= info[0] %>/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=<%= info[0] %>&linkCode=as2&tag=cigeek-22"><img alt="300x200" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= info[0] %>&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
+		<div class="caption">
+			<h3><a href="http://www.amazon.co.jp/gp/product/<%= info[0] %>/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=<%= info[0] %>&linkCode=as2&tag=cigeek-22"><%= info[1] %></a></h3>
+		</div>
+</div>
+
+						<% @foreignTitles.each_line(rs = $){ |line|
+							info = line.chomp.split(",")
+						%>
+						<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+								<a href="http://www.amazon.co.jp/gp/product/<%= info[0] %>/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=<%= info[0] %>&linkCode=as2&tag=cigeek-22"><img alt="300x200" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= info[0] %>&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
+								<div class="caption">
+									<h3><a href="http://www.amazon.co.jp/gp/product/<%= info[0] %>/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=<%= info[0] %>&linkCode=as2&tag=cigeek-22"><%= info[1] %></a></h3>
+							</div>
+						</div>
+						<% } end %>
+
+
+def getAsin(fileName)
+	num = 0
+	File.foreach(fileName){ |line|
+		info = line.chomp.split(",")
+		asinCode[num] = @foreignAsins[num]
+		num += 1
+	}
+	return asinCode[]
+end
+
+def getTitle(fileName)
+	num = 0
+	File.foreach(fileName){ |line|
+		info = line.chomp.split(",")
+		movieTitle[num] = info[1]
+		num += 1
+	}
+	return movieTitle
+end
+
+=begin
+	@foreignAsins = Array.new()
+	#@foreignTitles = Array.new()
+
+	fileName="foreignTitles.dat"
+	@foreignAsins = getAsin(fileName)
+	#@foreignTitles = getTitle(fileName)
+
+
+	num = -1
+	File.foreach("japaneseTitles.dat"){ |line|
+		num += 1
+		info = line.chomp.split(",")
+		@japaneseAsin[num] = @foreignAsins[num]
+		@japaneseTitle[num] = info[1]
+	}
+=end

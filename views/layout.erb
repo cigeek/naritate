@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>成立Q作</title>
+	<link rel="stylesheet" href="css/bootstrap.css" media="screen">
+	<link rel="stylesheet" href="css/sticky-footer-navbar.css" media="screen">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+	<style type="text/css">
+		.thumbnail {
+			margin-top: 30px;
+			margin-bottom: 30px;
+			height: 400px;
+		}
+			.thumbnail img {
+				display: block;
+				margin: auto;
+			}
+
+		.jumbotron {
+			margin-top: 30px;
+		}
+	</style>
+</head>
+ <body>
+	<div id="wrap">
+	    <!--Begin: Fixed navbar-->
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">成立Q作</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/">ホーム</a></li>
+						<li><a href="/about">当サイトについて</a></li>
+					</ul>
+				</div><!--/.nav-collapse-->
+			</div>
+		</div>
+		<!--End: Fixed navbar-->
+
+		<!--Begin: Contents -->
+			<%= yield %>
+		<!--End: Contents-->
+
+	</div>
+<!--Begin: Site footer -->
+<div id="footer">
+    <div class="container">
+    <p class="muted credit">Created by <a href="http://twitter.com/@_cigeek">@_cigeek</a>.</p>
+    </div>
+</div>
+<!--End: Site footer-->
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
