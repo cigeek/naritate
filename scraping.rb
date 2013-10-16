@@ -20,6 +20,8 @@ Amazon::Ecs.options = {
 # Amazon APIからASINを取得
 #
 def getAsin(title)
+    sleep 0.5
+
     res = Amazon::Ecs.item_search(title, {
         :search_index => 'DVD',
         :responce_group => 'Small',
@@ -32,8 +34,6 @@ def getAsin(title)
         asinCode = nil
     end
 
-    sleep 0.1
-
     return asinCode
 end
 
@@ -43,7 +43,7 @@ end
 def scrapeTitles(targetUrl, fileName)
 
     charset = nil
-    html = open(targetURL) do |f|
+    html = open(targetUrl) do |f|
         charset = f.charset
         f.read
     end
@@ -76,7 +76,7 @@ def genCode(genedFile, fileName)
             if asinCode != nil
                 file.write '<div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
-                                    <a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN' + asinCode + '&linkCode=as2&tag=cigeek-22"><img alt="300x200" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + asinCode + '&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
+                                    <a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN' + asinCode + '&linkCode=as2&tag=cigeek-22"><img alt="300x200" alt="title" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + asinCode + '&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
                                     <div class="caption">
                                     <h3><a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=' + asinCode + '&linkCode=as2&tag=cigeek-22">' + title + '</a></h3>
                                     </div>
