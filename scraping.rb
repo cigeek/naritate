@@ -94,3 +94,5 @@ genCode("foreign.dat", "foreignTitles.dat")
 # 邦画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japaneseTitles.dat")
 genCode("japanese.dat", "japaneseTitles.dat")
+
+puts "done."
