@@ -20,7 +20,7 @@ Amazon::Ecs.options = {
 # Amazon APIからASINを取得
 #
 def getAsin(title)
-    sleep 0.5
+    sleep 1
 
     res = Amazon::Ecs.item_search(title, {
         :search_index => 'DVD',
