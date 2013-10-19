@@ -76,7 +76,7 @@ def genCode(genedFile, fileName)
             if asinCode != nil
                 file.write '<div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
-                                    <a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN' + asinCode + '&linkCode=as2&tag=cigeek-22"><img alt="300x200" alt="title" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + asinCode + '&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
+                                    <a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN' + asinCode + '&linkCode=as2&tag=cigeek-22"><img alt="' + title + '" alt="title" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + asinCode + '&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22"></a>
                                     <div class="caption">
                                     <h3><a href="http://www.amazon.co.jp/gp/product/' + asinCode + '/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=' + asinCode + '&linkCode=as2&tag=cigeek-22">' + title + '</a></h3>
                                     </div>
