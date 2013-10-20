@@ -67,6 +67,7 @@ def scrapeTitles(targetUrl, fileName)
 end
 
 def genCode(genedFile, fileName)
+	i =0
     File.open(genedFile, 'w:UTF-8') { |file|
         File.foreach(fileName){ |line|
             title = line.chomp
@@ -82,6 +83,26 @@ def genCode(genedFile, fileName)
                                     </div>
                                 </div>
                             </div>'
+                i += 1
+
+               	if i == 3
+               		file.write '<style>
+									.naritate-text-ads { width: 320px; height: 50px; }
+									@media(min-width: 500px) { .naritate-text-ads { width: 468px; height: 60px; } }
+									@media(min-width: 800px) { .naritate-text-ads { width: 728px; height: 90px; } }
+								</style>
+								<div class ="col-md-12">
+									<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+										<!-- Naritate Text Ads -->
+										<ins class="adsbygoogle naritate-text-ads"
+										     style="display:inline-block"
+										     data-ad-client="ca-pub-6892910203747933"
+										     data-ad-slot="5246158803"></ins>
+										<script>
+										(adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+								</div>'
+				end
             end
         }
     }

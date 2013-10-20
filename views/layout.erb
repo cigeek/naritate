@@ -59,6 +59,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="/">ホーム</a></li>
+						<li><a href="http://blog.kosk.me/">ブログ</a></li>
 					</ul>
 				</div><!--/.nav-collapse-->
 			</div>
@@ -68,12 +69,28 @@
 		<!--Begin: Contents -->
 			<%= yield %>
 		<!--End: Contents-->
+	</div>
 
+	<style>
+		.naritate-banner-ads { width: 320px; height: 50px; }
+		@media(min-width: 500px) { .naritate-banner-ads { width: 468px; height: 60px; } }
+		@media(min-width: 800px) { .naritate-banner-ads { width: 728px; height: 90px; } }
+	</style>
+	<div class="col-md-12">
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Naritate Banner Ads -->
+			<ins class="adsbygoogle naritate-banner-ads"
+				style="display:inline-block"
+				data-ad-client="ca-pub-6892910203747933"
+				data-ad-slot="8199625209"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
 	</div>
 <!--Begin: Site footer -->
 <div id="footer">
     <div class="container">
-    <p class="muted credit"></p>
+    <p class="muted credit">Created by kosk.</p>
     </div>
 </div>
 <!--End: Site footer-->
