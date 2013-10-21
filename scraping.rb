@@ -20,7 +20,7 @@ Amazon::Ecs.options = {
 # Amazon APIからASINを取得
 #
 def getAsin(title)
-    sleep 1
+    sleep 0.5
 
     res = Amazon::Ecs.item_search(title, {
         :search_index => 'DVD',
@@ -50,24 +50,25 @@ def scrapeTitles(targetUrl, fileName)
     doc = Nokogiri::HTML.parse(html, nil, charset)
 
     # 映画のタイトルを抽出してファイルに書き込み
-    titlesNum = 1
+    titlesNum = 0
     File.open(fileName, 'w:UTF-8') { |file|
         doc.xpath('//div[@class="productBox"]').each do |node|
             title = node.xpath('span[@class="productText"]/a').text
             if title !~ /Blu\-ray/
-                if titlesNum >= MAX_TITLES then
+                if titlesNum > MAX_TITLES then
                 	file.write title
                  	break
+                else
+                    file.write title + "\n"
+                    titlesNum += 1
                 end
-                file.write title + "\n"
-                titlesNum += 1
             end
         end
     }
 end
 
 def genCode(genedFile, fileName)
-	i =0
+	i = 0
     File.open(genedFile, 'w:UTF-8') { |file|
         File.foreach(fileName){ |line|
             title = line.chomp
