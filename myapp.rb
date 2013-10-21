@@ -3,8 +3,8 @@ require 'sinatra/reloader'
 
 get '/' do
 
-@foreign = File.read("foreign.dat")
-@japanese = File.read("japanese.dat")
+@foreign = File.read("foreign.html")
+@japanese = File.read("japanese.html")
 
     erb :index
 end

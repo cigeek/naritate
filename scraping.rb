@@ -110,10 +110,10 @@ end
 
 # 洋画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreignTitles.dat")
-genCode("foreign.dat", "foreignTitles.dat")
+genCode("foreign.html", "foreignTitles.dat")
 
 # 邦画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japaneseTitles.dat")
-genCode("japanese.dat", "japaneseTitles.dat")
+genCode("japanese.html", "japaneseTitles.dat")
 
 puts "done."
