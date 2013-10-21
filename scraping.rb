@@ -50,12 +50,12 @@ def scrapeTitles(targetUrl, fileName)
     doc = Nokogiri::HTML.parse(html, nil, charset)
 
     # 映画のタイトルを抽出してファイルに書き込み
-    titlesNum = 0
+    titlesNum = 1
     File.open(fileName, 'w:UTF-8') { |file|
         doc.xpath('//div[@class="productBox"]').each do |node|
             title = node.xpath('span[@class="productText"]/a').text
             if title !~ /Blu\-ray/
-                if titlesNum > MAX_TITLES then
+                if titlesNum >= MAX_TITLES then
                 	file.write title
                  	break
                 else
