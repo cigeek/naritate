@@ -1,0 +1,14 @@
+.thumbnail {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	height: 400px;
+}
+	.thumbnail img {
+		display: block;
+		margin: auto;
+		max-width: 200px;
+	}
+
+.jumbotron {
+	margin-top: 30px;
+}

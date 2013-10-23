@@ -90,7 +90,7 @@ def genCode(genedFile, fileName)
 
                	if i == 3
                		file.write '
-<div class ="col-md-6 col-md-offset-3">
+<center>
     <style>
     	.naritate-text-ads { width: 320px; height: 50px; }
     	@media(min-width: 500px) { .naritate-text-ads { width: 468px; height: 60px; } }
@@ -105,7 +105,7 @@ def genCode(genedFile, fileName)
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-</div>
+</center>
 '
 				end
             end
