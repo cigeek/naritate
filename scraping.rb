@@ -86,23 +86,6 @@ def genCode(genedFile, fileName)
     </div>
 </div>
 '
-                i += 1
-
-               	if i == 3
-               		file.write '
-<div class="col-md-10 col-md-offset-2">		
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- Naritate Text Ads -->
-		<ins class="adsbygoogle naritate-text-ads"
-			style="display:inline-block"
-            data-ad-client="ca-pub-6892910203747933"
-            data-ad-slot="5246158803"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-'
-				end
             end
         }
     }
