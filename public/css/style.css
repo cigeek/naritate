@@ -1,9 +1,8 @@
-/* Thumbnails
+/* Thumbnail styles
 -------------------------------------------------- */
 .thumbnail {
 	margin-top: 30px;
-	margin-bottom: 30px;
-	height: 400px;
+	height: 450px;
 }
 	.thumbnail img {
 		display: block;
@@ -11,10 +10,20 @@
 		max-width: 200px;
 	}
 
-/* Narrow Jumbotron
+/* Narrow Jumbotron styles
 -------------------------------------------------- */
 .jumbotron {
 	margin-top: 30px;
+}
+
+/* Sticky Navbar styles
+-------------------------------------------------- */
+.nav-tabs {
+  margin-top: 20px;
+}
+
+.movieInfo {
+  margin-bottom: 40px;
 }
 
 /* Sticky footer styles
@@ -43,7 +52,6 @@ body {
   background-color: #EEEEEE;
 }
 
-
 /* Custom page CSS
 -------------------------------------------------- */
 
@@ -58,6 +66,19 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+/* Rank table styles
+-------------------------------------------------- */
+.rank {
+  width: 10%;
+}
+.ranktitles {
+  width: 70%;
+}
+.rankscore {
+  width: 20%;
+}
+
 
 /* Ads 
 -------------------------------------------------- */

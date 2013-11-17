@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>成立Q作 〜映画選びのお供に〜</title>
+	<title><%= @pageTitle %></title>
 	<link rel="stylesheet" href="css/bootstrap.css" media="screen">
 	<link rel="stylesheet" href="/css/style.css" media="screen">
+	<script src="http://code.jquery.com/jquery.js"></script>
 
 	<meta name="keywords" content="旧作,レンタル,DVD,映画">
 	<meta name="description" content="旧作扱いになったばかりの作品の一覧が見れる。">
@@ -39,11 +40,11 @@
 		ga('create', 'UA-44891792-1', 'kosk.me');
 		ga('send', 'pageview');
 
-</script>
+	</script>
 </head>
  <body>
 	<div id="wrap">
-	    <!--Begin: Fixed navbar-->
+	  <!--Begin: Fixed navbar-->
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -52,40 +53,30 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/">成立Q作</a>
+					<a class="navbar-brand" href="/">なりたてQ作</a>
 				</div>
 				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li><a href="/" title="ホーム"><span class="glyphicon glyphicon-home"></span> ホーム</a></li>
-						<!--
-						<li><a href="/ranking" title="ランキング"><span class="glyphicon glyphicon-stats"></span> ランキング</a></li>
-						-->
-					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="http://twitter.com/share?count=horizontal&original_referer=http://naritate.kosk.me/&text=成立Q作〜映画選びのお供に〜&url=http://naritate.kosk.me/&via=_cigeek" onclick="window.open(this.href, 'tweetwindow', 'width=550, height=450,personalbar=0,toolbar=0,scrollbars=1,resizable=1'); return false;"><span class="glyphicon glyphicon-heart"></span> 皆に教える</a></li>
-						<li><a href="/about" title="当サービスについて"><span class="glyphicon glyphicon-info-sign"></span> 当サービスについて</a></li>
 						<li class="dropdown"><a href="#" title="リンク" class="dropdown-toggle" data-toggle="dropdown">リンク<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="http://blog.kosk.me/" title="ブログ"><span class="glyphicon glyphicon-user"></span> ブログ</a></li>
 						</ul>
 				</div><!--/.nav-collapse-->
-			</div>
-		</div>
+			</div><!--/.container-->
+		</div><!--/.navbar-header-->
 		<!--End: Fixed navbar-->
-
 		<!--Begin: Contents -->
 			<%= yield %>
 		<!--End: Contents-->
-	</div>
+	</div><!--/.wrap-->
 	<!--Begin: Site footer -->
 	<div id="footer">
 	    <div class="container">
-	    <p class="text-muted credit">Created by kosk.</p>
+	    <p class="text-muted credit">Created by <a href="http://twitter.com/_cigeek">kosk</a>.</p>
 	    </div>
 	</div>
 	<!--End: Site footer-->
-
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

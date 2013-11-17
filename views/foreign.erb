@@ -1,0 +1,57 @@
+<div class="container movieInfo">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs nav-justified">
+        <li><a href="/" title="ホーム"><span class="glyphicon glyphicon-home"></span> ホーム</a></li>
+        <li class="active"><a href="/foreign"><span class="glyphicon glyphicon-film"></span> 洋画</a></li>
+        <li><a href="/japanese"><span class="glyphicon glyphicon-film"></span> 邦画</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-stats"></span> ランキング<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="/ranking">総合</a></li>
+            <li><a href="/rankingfr">洋画</a></li>
+            <li><a href="/rankingjp">邦画</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <% @foreignTitles.each do |title| %>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img alt="<%= title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= title.id %>&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22">
+        <div class="caption">
+          <h3 class="text-center"><%= title.title %></h3>
+          <p class="text-right">
+            <a href="http://www.amazon.co.jp/dp/product-description/<%= title.id %>/?tag=cigeek-22">詳細</a> | <a href="http://www.amazon.co.jp/product-reviews/<%= title.id %>/?tag=cigeek-22">レビュー</a> (Amazon)
+          </p>
+        <p class="text-right" id="<%= title.id %>">
+            <a type="button" class="btn btn-primary btn-sm favCmd" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> イイヨ！ ( <%= title.favs.to_s %> )</a> 
+            <a type="button" class="btn btn-default btn-sm timeCmd" role="button"><span class="glyphicon glyphicon-ok"></span> 借りた！ ( <%= title.times.to_s %> )</a>
+        </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  $('.favCmd').click(function() {
+    var $id = $(this).parent().attr('id');
+    $.post('/fav/fr', {
+      id: $id
+    }, function() {
+      $('#' + $id + ' > .favCmd').attr('disabled', true);
+    });
+  });
+  $('.timeCmd').click(function() {
+    var $id = $(this).parent().attr('id');
+    $.post('/time/fr', {
+      id: $id
+    }, function() {
+      $('#' + $id + ' > .timeCmd').attr('disabled', true);
+    });
+  });
+</script>
