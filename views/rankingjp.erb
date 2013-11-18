@@ -21,12 +21,12 @@
     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
       <h2>邦画</h2>
       <hr>
-      <h3>イイ！ランキング</h3>
+      <h3>スキ！ランキング</h3>
       <table class="table table-striped">
         <tr>
           <th class="rank">#</th>
           <th class="ranktitle">タイトル</th>
-          <th class="rankscore">イイ！数</th>
+          <th class="rankscore">スキ！数</th>
         </tr>
         <% rank = 1 %>
         <% @favrank.each do |title| %>
@@ -38,12 +38,12 @@
         <% rank += 1 %>
         <% end %>
       </table>
-      <h3>借りた！ランキング</h3>
+      <h3>借りたランキング</h3>
       <table class="table table-striped">
         <tr>
           <th class="rank">#</th>
           <th class="ranktitle">タイトル</th>
-          <th class="rankscore">借りた！数</th>
+          <th class="rankscore">借りた数</th>
         </tr>
         <% rank = 1 %>
         <% @timerank.each do |title| %>
