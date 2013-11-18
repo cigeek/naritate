@@ -9,7 +9,7 @@ require 'amazon/ecs'
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
 
 # 取得するタイトル数
-MAX_TITLES = 3
+MAX_TITLES = 6
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
@@ -89,4 +89,4 @@ end
 # 洋画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
 # 邦画のタイトルを取得
-#scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
+scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
