@@ -9,7 +9,7 @@ require 'amazon/ecs'
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
 
 # 取得するタイトル数
-MAX_TITLES = 18
+MAX_TITLES = 3
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
@@ -53,11 +53,14 @@ class Movie
 
   # Movieクラスのインスタンスの情報をDBへ追加
   def addToDB(tableName)
-    ActiveRecord::Base.connection.execute("insert or ignore into #{tableName} (title, asin, created_at) values (
-      '#{@title}',
-      '#{@asin}',
-      '2013-11-18 04:47:07'
-      );")
+    if tableName == 'foreigntitles'
+      Foreigntitle.where(title: @title, asin: @asin).first_or_create
+    elsif tableName == 'japanesetitles'
+      Japanesetitle.where(title: @title, asin: @asin).first_or_create
+    end
+      
+
+    #ActiveRecord::Base.connection.execute("insert or ignore into #{tableName} (title, asin, created_at) values ('#{@title}', '#{@asin}', '2013-11-18 04:47:07');")
   end
 
   attr_accessor :title, :asin
@@ -89,4 +92,4 @@ end
 # 洋画のタイトルを取得
 scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
 # 邦画のタイトルを取得
-scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
+#scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
