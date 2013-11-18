@@ -9,7 +9,7 @@ require 'amazon/ecs'
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
 
 # 取得するタイトル数
-MAX_TITLES = 6
+MAX_TITLES = 12
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
