@@ -21,11 +21,11 @@
     <% @japaneseTitles.each do |title| %>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img alt="<%= title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= title.id %>&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22">
+        <img alt="<%= title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= title.asin %>&Format=_SL300_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=cigeek-22">
         <div class="caption">
           <h3 class="text-center"><%= title.title %></h3>
           <p class="text-right">
-            <a href="http://www.amazon.co.jp/dp/product-description/<%= title.id %>/?tag=cigeek-22">詳細</a> | <a href="http://www.amazon.co.jp/product-reviews/<%= title.id %>/?tag=cigeek-22">レビュー</a> (Amazon)
+            <a href="http://www.amazon.co.jp/dp/product-description/<%= title.asin %>/?tag=cigeek-22">詳細</a> | <a href="http://www.amazon.co.jp/product-reviews/<%= title.asin %>/?tag=cigeek-22">レビュー</a> (Amazon)
           </p>
         <p class="text-right" id="<%= title.id %>">
             <a type="button" class="btn btn-primary btn-sm favCmd" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> イイヨ！ ( <%= title.favs.to_s %> )</a> 

@@ -1,11 +1,10 @@
 # ライブラリ読み込み
+require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
-
-# データベース接続設定
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/movieInfo.db')
+require './environments'
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
@@ -31,7 +30,7 @@ get '/foreign' do
   @pageTitle = '洋画 - なりたてQ作 〜映画選びのお供に〜'
 
   # foreignTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
-  @foreignTitles = Foreigntitle.order("added desc").limit(MAX_TITLES).all
+  @foreignTitles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).all
 
   erb :foreign
 end
@@ -41,7 +40,7 @@ get '/japanese' do
   @pageTitle = '邦画 - なりたてQ作 〜映画選びのお供に〜'
 
   # japaneseTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
-  @japaneseTitles = Japanesetitle.order("added desc").limit(MAX_TITLES).all
+  @japaneseTitles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).all
 
   erb :japanese
 end
@@ -51,9 +50,9 @@ get '/ranking' do
   @pageTitle = '総合ランキング - なりたてQ作 〜映画選びのお供に〜'
 
   # foreignTitles、japaneseTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @favrank = ActiveRecord::Base.connection.execute("select * from foreignTitles union select * from japaneseTitles order by favs desc limit 5;")
+  @favrank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by favs desc limit 5;")
   # foreignTitles、japaneseTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @timerank = ActiveRecord::Base.connection.execute("select * from foreignTitles union select * from japaneseTitles order by times desc limit 5;")
+  @timerank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by times desc limit 5;")
   
   erb :ranking
 end

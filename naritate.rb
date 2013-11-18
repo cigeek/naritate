@@ -5,11 +5,17 @@ require 'open-uri'
 require 'nokogiri'
 require 'amazon/ecs'
 
+# DB接続設定
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
+
 # 取得するタイトル数
 MAX_TITLES = 18
 
-# データベース接続設定
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/movieInfo.db')
+# テーブルをクラス化
+class Foreigntitle < ActiveRecord::Base
+end
+class Japanesetitle < ActiveRecord::Base
+end
 
 # Amazon API接続設定
 Amazon::Ecs.options = {
@@ -47,9 +53,10 @@ class Movie
 
   # Movieクラスのインスタンスの情報をDBへ追加
   def addToDB(tableName)
-      ActiveRecord::Base.connection.execute("insert or ignore into #{tableName} (id, title) values (
+    ActiveRecord::Base.connection.execute("insert or ignore into #{tableName} (title, asin, created_at) values (
+      '#{@title}',
       '#{@asin}',
-      '#{@title}'
+      '2013-11-18 04:47:07'
       );")
   end
 
@@ -80,6 +87,6 @@ def scrapeTitles(targetUrl, tableName)
 end
 
 # 洋画のタイトルを取得
-scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "Foreigntitles")
+scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
 # 邦画のタイトルを取得
-scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "Japanesetitles")
+scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
