@@ -4,7 +4,9 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
-require './environments'
+
+# DB接続設定
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
