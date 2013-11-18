@@ -58,9 +58,6 @@ class Movie
     elsif tableName == 'japanesetitles'
       Japanesetitle.where(title: @title, asin: @asin).first_or_create
     end
-      
-
-    #ActiveRecord::Base.connection.execute("insert or ignore into #{tableName} (title, asin, created_at) values ('#{@title}', '#{@asin}', '2013-11-18 04:47:07');")
   end
 
   attr_accessor :title, :asin
