@@ -9,7 +9,7 @@ require 'amazon/ecs'
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
 
 # 取得するタイトル数
-MAX_TITLES = 18
+MAX_TITLES = 15
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
@@ -54,9 +54,15 @@ class Movie
   # Movieクラスのインスタンスの情報をDBへ追加
   def addToDB(tableName)
     if tableName == 'foreigntitles'
-      Foreigntitle.where(title: @title, asin: @asin).first_or_create
+      title = Foreigntitle.where(title: @title).first
+      if title == nil
+        Foreigntitle.create(:title => @title, :asin => @asin)
+      end
     elsif tableName == 'japanesetitles'
-      Japanesetitle.where(title: @title, asin: @asin).first_or_create
+      title = Japanesetitle.where(title: @title).first
+      if title == nil
+        Japanesetitle.create(:title => @title, :asin => @asin)
+      end
     end
   end
 
@@ -73,7 +79,7 @@ def scrapeTitles(targetUrl, tableName)
     f.read
   end
   doc = Nokogiri::HTML.parse(html, nil, charset)
-  numTitles = 0
+  numTitles = 1
   doc.xpath('//div[@class="productBox"]').each do |node|
     title = node.xpath('span[@class="productText"]/a').text
     if title !~ /Blu\-ray/ && numTitles < MAX_TITLES

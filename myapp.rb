@@ -52,9 +52,9 @@ get '/ranking' do
   @pageTitle = '総合ランキング - なりたてQ作 〜映画選びのお供に〜'
 
   # foreignTitles、japaneseTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @favrank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by favs desc limit 5;")
+  @favrank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, favs desc limit #{MAX_RANK};")
   # foreignTitles、japaneseTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @timerank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by times desc limit 5;")
+  @timerank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, times desc limit #{MAX_RANK};")
   
   erb :ranking
 end
@@ -64,9 +64,9 @@ get '/rankingfr' do
   @pageTitle = '洋画ランキング - なりたてQ作 〜映画選びのお供に〜'
 
   # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @favrank = Foreigntitle.order("favs desc").limit(MAX_RANK).all
+  @favrank = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
   # foreignTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @timerank = Foreigntitle.order("times desc").limit(MAX_RANK).all
+  @timerank = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
 
   erb :rankingfr
 end
@@ -76,9 +76,9 @@ get '/rankingjp' do
   @pageTitle = '邦画ランキング - なりたてQ作 〜映画選びのお供に〜'
   
   # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @favrank = Japanesetitle.order("favs desc").limit(MAX_RANK).all
+  @favrank = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
   # foreignTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @timerank = Japanesetitle.order("times desc").limit(MAX_RANK).all
+  @timerank = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
 
   erb :rankingjp
 end
