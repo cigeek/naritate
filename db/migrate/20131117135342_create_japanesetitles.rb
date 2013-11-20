@@ -7,6 +7,9 @@ class CreateJapanesetitles < ActiveRecord::Migration
       t.integer :times, :default => 0
       t.timestamps
     end
+
+    add_index :japanesetitles, [:title], :unique => true
+    add_index :japanesetitles, [:asin], :unique => true
   end
 
   def down

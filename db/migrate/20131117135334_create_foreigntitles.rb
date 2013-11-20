@@ -7,6 +7,9 @@ class CreateForeigntitles < ActiveRecord::Migration
       t.integer :times, :default => 0
       t.timestamps
     end
+
+    add_index :foreigntitles, [:title], :unique => true
+    add_index :foreigntitles, [:asin], :unique => true
   end
 
   def down

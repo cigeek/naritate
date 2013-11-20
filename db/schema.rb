@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118004656) do
+ActiveRecord::Schema.define(version: 20131117135342) do
 
   create_table "foreigntitles", force: true do |t|
     t.string   "title",                  null: false
@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 20131118004656) do
     t.datetime "updated_at"
   end
 
-  add_index "foreigntitles", ["title", "asin"], name: "index_foreigntitles_on_title_and_asin", unique: true
+  add_index "foreigntitles", ["asin"], name: "index_foreigntitles_on_asin", unique: true
+  add_index "foreigntitles", ["title"], name: "index_foreigntitles_on_title", unique: true
 
   create_table "japanesetitles", force: true do |t|
     t.string   "title"
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131118004656) do
     t.datetime "updated_at"
   end
 
-  add_index "japanesetitles", ["title", "asin"], name: "index_japanesetitles_on_title_and_asin", unique: true
+  add_index "japanesetitles", ["asin"], name: "index_japanesetitles_on_asin", unique: true
+  add_index "japanesetitles", ["title"], name: "index_japanesetitles_on_title", unique: true
 
 end
