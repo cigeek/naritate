@@ -27,6 +27,7 @@
           <p class="text-center">
             <a href="http://www.amazon.co.jp/dp/product-description/<%= title.asin %>/?tag=cigeek-22">詳細</a> | <a href="http://www.amazon.co.jp/product-reviews/<%= title.asin %>/?tag=cigeek-22">レビュー</a>
           </p>
+          <hr>
           <p class="text-center" id="<%= title.id %>">
             <a type="button" class="btn btn-primary btn-sm favCmd" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs.to_s %> )</a> 
             <a type="button" class="btn btn-default btn-sm timeCmd" role="button"><span class="glyphicon glyphicon-ok"></span> 借りた ( <%= title.times.to_s %> )</a>
