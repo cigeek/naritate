@@ -9,7 +9,6 @@ gem 'amazon-ecs'
 group :development do
   gem 'sinatra-reloader'
   gem 'sqlite3'
-  gem 'tux'
 end
 
 group :production do

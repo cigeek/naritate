@@ -1,14 +1,24 @@
 /* Thumbnail styles
 -------------------------------------------------- */
-.thumbnail {
-	margin-top: 30px;
-	height: 450px;
+#thumbnails {
+  padding: 25px 0 25px 0;
 }
-	.thumbnail img {
-		display: block;
-		margin: auto;
-		max-width: 200px;
-	}
+
+.thumb {
+  position: relative;
+  min-height: 1px;
+  padding: 5px;
+}
+
+.thumbnail {
+  background: #FBFBFB;
+  -webkit-box-shadow: 0 4px 6px -6px #777;
+  -moz-box-shadow: 0 4px 6px -6px #777;
+  box-shadow: 0 4px 6px -6px #777;
+}
+.thumbnail > img {
+  width: 100%;
+}
 
 /* Narrow Jumbotron styles
 -------------------------------------------------- */
@@ -22,13 +32,8 @@
   margin-top: 20px;
 }
 
-.movieInfo {
-  margin-bottom: 40px;
-}
-
 /* Sticky footer styles
 -------------------------------------------------- */
-
 html,
 body {
   height: 100%;
@@ -36,7 +41,7 @@ body {
 }
 
 /* Wrapper for page content to push down footer */
-#wrap {
+#wrapper {
   min-height: 100%;
   height: auto !important;
   height: 100%;
@@ -54,8 +59,7 @@ body {
 
 /* Custom page CSS
 -------------------------------------------------- */
-
-#wrap > .container {
+#wrapper > .container {
   padding: 60px 15px 0;
 }
 .container .credit {
@@ -80,41 +84,23 @@ body {
 }
 
 
-/* Ads 
+/* Media Query -> Ads and etc
 -------------------------------------------------- */
 @media(min-width: 0px) {
-	.gAds {
-		width: 320px;
-		height: 50px;
-		margin: 0 auto;
-	}
-
-	.adsbygoogle {
+  .adsbygoogle {
 		width: 320px;
 		height: 50px;
 	}
 }
 
 @media(min-width: 500px) {
-	.gAds {
-		width: 468px;
-		height: 60px;
-		margin: 0 auto;
-	}
-
-	.adsbygoogle {
+  .adsbygoogle {
 		width: 468px;
 		height: 60px;
 	}
 }
 
 @media(min-width: 800px) {
-	.gAds {
-		width: 728px;
-		height: 90px;
-		margin: 0 auto;
-	}
-	
 	.adsbygoogle {
 		width: 728px;
 		height: 90px;

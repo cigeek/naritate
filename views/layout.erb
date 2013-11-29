@@ -7,6 +7,9 @@
 	<link rel="stylesheet" href="css/bootstrap.css" media="screen">
 	<link rel="stylesheet" href="/css/style.css" media="screen">
 	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/masonry.min.js"></script>
+	<script src="js/imagesloaded.min.js"></script>
 
 	<meta name="keywords" content="旧作,レンタル,DVD,映画">
 	<meta name="description" content="旧作扱いになったばかりの作品の一覧が見れる。">
@@ -43,7 +46,7 @@
 	</script>
 </head>
  <body>
-	<div id="wrap">
+	<div id="wrapper">
 	  <!--Begin: Fixed navbar-->
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
@@ -53,7 +56,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#wrap">なりたてQ作</a>
+					<a class="navbar-brand" href="#wrapper">なりたてQ作</a>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -69,7 +72,7 @@
 		<!--Begin: Contents -->
 			<%= yield %>
 		<!--End: Contents-->
-	</div><!--/.wrap-->
+	</div><!--/.wrapper-->
 	<!--Begin: Site footer -->
 	<div id="footer">
 	    <div class="container">
@@ -77,6 +80,13 @@
 	    </div>
 	</div>
 	<!--End: Site footer-->
-  <script src="js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var w = $(window).width();
+    if (w < 768) {
+      $('.nav-tabs').removeClass('nav-justified');
+    }
+   });
+</script>
 </body>
 </html>
