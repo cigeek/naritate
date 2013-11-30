@@ -13,10 +13,10 @@
             <li><a href="/rankingfr">洋画</a></li>
             <li><a href="/rankingjp">邦画</a></li>
           </ul>
-        </li>
+        </li><!--/.dropdown-->
       </ul>
     </div>
-  </div>
+  </div><!--/.row-->
   <div class="row" id="thumbnails">
     <% @japaneseTitles.each do |title| %>
     <div class="thumb col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -36,9 +36,10 @@
       </div>
     </div>
     <% end %>
-  </div>
-</div>
+  </div><!--/.row#thumbnails-->
+</div><!--/.container.movieInfo-->
 <script>
+  /* Masonry */
   $(document).ready(function() {
     var $container = $('#thumbnails');
     $container.imagesLoaded(function() {
@@ -48,6 +49,7 @@
       });
     });
   });
+  /* fav */
   $('.favCmd').click(function() {
     var $id = $(this).parent().attr('id');
     $.post('/fav/jp', {
@@ -56,6 +58,7 @@
       $('#' + $id + ' > .favCmd').attr('disabled', true);
     });
   });
+  /* time */
   $('.timeCmd').click(function() {
     var $id = $(this).parent().attr('id');
     $.post('/time/jp', {
