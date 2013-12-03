@@ -29,8 +29,8 @@
           </p>
           <hr>
           <p class="text-center" id="<%= title.id %>">
-            <a type="button" class="btn btn-primary btn-sm favCmd" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs.to_s %> )</a> 
-            <a type="button" class="btn btn-default btn-sm timeCmd" role="button"><span class="glyphicon glyphicon-ok"></span> 借りた ( <%= title.times.to_s %> )</a>
+            <a type="button" class="btn btn-primary btn-sm favCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs.to_s %> )</a> 
+            <a type="button" class="btn btn-default btn-sm timeCmdJp" role="button"><span class="glyphicon glyphicon-ok"></span> 借りた ( <%= title.times.to_s %> )</a>
           </p>
         </div>
       </div>
@@ -38,33 +38,6 @@
     <% end %>
   </div><!--/.row#thumbnails-->
 </div><!--/.container.movieInfo-->
-<script>
-  /* Masonry */
-  $(document).ready(function() {
-    var $container = $('#thumbnails');
-    $container.imagesLoaded(function() {
-      $container.masonry({
-        columnWidth: '.thumb',
-        itemSelector: '.thumb'
-      });
-    });
-  });
-  /* fav */
-  $('.favCmd').click(function() {
-    var $id = $(this).parent().attr('id');
-    $.post('/fav/jp', {
-      id: $id
-    }, function() {
-      $('#' + $id + ' > .favCmd').attr('disabled', true);
-    });
-  });
-  /* time */
-  $('.timeCmd').click(function() {
-    var $id = $(this).parent().attr('id');
-    $.post('/time/jp', {
-      id: $id
-    }, function() {
-      $('#' + $id + ' > .timeCmd').attr('disabled', true);
-    });
-  });
-</script>
+<script src="js/masonry.min.js"></script>
+<script src="js/imagesloaded.min.js"></script>
+<script src="js/naritate.js"></script>

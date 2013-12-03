@@ -7,12 +7,8 @@
   <meta name="description" content="旧作扱いになったばかりの作品の一覧が見れる。">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--CSS/JS-->
-  <link rel="stylesheet" href="css/bootstrap.css" media="screen">
-  <link rel="stylesheet" href="css/style.css" media="screen">
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/masonry.min.js"></script>
-  <script src="js/imagesloaded.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <!--Favicon-->
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
@@ -31,13 +27,8 @@
 		<script src="js/html5shiv.js"></script>
    <![endif]-->
    <!--Google Analitycs-->
-   <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-44891792-1', 'kosk.me');
-    ga('send', 'pageview');
+  <script>
+    (function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-44891792-1","kosk.me");ga("send","pageview");
   </script>
 </head>
 <body>
@@ -63,10 +54,8 @@
      </div><!--/.nav-collapse-->
    </div><!--/.container-->
  </div><!--/.navbar-header-->
- <!--/Fixed navbar-->
  <!--Contents -->
  <%= yield %>
- <!--/Contents-->
 </div><!--/.wrapper-->
 <!--Footer -->
 <div id="footer">
@@ -74,15 +63,9 @@
    <p class="text-muted credit">Created by <a href="http://twitter.com/_cigeek">kosk</a>.</p>
  </div>
 </div>
-<!--/Footer-->
-<!--Adjust nav-tabs-->
+<script src="js/bootstrap.min.js"></script>
 <script>
-  $(document).ready(function() {
-    var w = $(window).width();
-    if (w < 768) {
-      $('.nav-tabs').removeClass('nav-justified');
-    }
-  });
+  $(document).ready(function(){var a=$(window).width();if(a<768){$(".nav-tabs").removeClass("nav-justified")}});
 </script>
 </body>
 </html>
