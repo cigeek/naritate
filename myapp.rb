@@ -22,14 +22,14 @@ MAX_RANK = 5
 
 # トップ画面
 get '/' do
-  @pageTitle = 'なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '旧作チェッカー『なりたてQ作』'
 
   erb :index
 end
 
 # 洋画タイトル一覧
 get '/foreign' do
-  @pageTitle = '洋画 - なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '洋画 - 旧作チェッカー『なりたてQ作』'
 
   # foreignTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
   @foreignTitles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).all
@@ -39,7 +39,7 @@ end
 
 # 邦画タイトル一覧
 get '/japanese' do
-  @pageTitle = '邦画 - なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '邦画 - 旧作チェッカー『なりたてQ作』'
 
   # japaneseTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
   @japaneseTitles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).all
@@ -49,7 +49,7 @@ end
 
 # 総合ランキング
 get '/ranking' do
-  @pageTitle = '総合ランキング - なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '総合ランキング - 旧作チェッカー『なりたてQ作』'
 
   # foreignTitles、japaneseTitlesテーブルの中で最もfav数の多いレコード5件を取得
   @favrank = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by favs desc, created_at desc limit #{MAX_RANK};")
@@ -61,7 +61,7 @@ end
 
 # 洋画ランキング 
 get '/rankingfr' do
-  @pageTitle = '洋画ランキング - なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '洋画ランキング - 旧作チェッカー『なりたてQ作』'
 
   # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
   @favrank = Foreigntitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
@@ -73,7 +73,7 @@ end
 
 # 邦画ランキング
 get '/rankingjp' do
-  @pageTitle = '邦画ランキング - なりたてQ作 〜映画選びのお供に〜'
+  @pageTitle = '邦画ランキング - 旧作チェッカー『なりたてQ作』'
   
   # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
   @favrank = Japanesetitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
