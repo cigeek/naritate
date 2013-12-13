@@ -35,7 +35,7 @@ class Movie
   end
 
   # Amazon APIからASINを取得して設定
-  def setAsin
+  def set_asin
     sleep 0.5
 
     res = Amazon::Ecs.item_search(@title, {
@@ -52,13 +52,13 @@ class Movie
   end
 
   # Movieクラスのインスタンスの情報をDBへ追加
-  def addToDB(tableName)
-    if tableName == 'foreigntitles'
+  def add_to(table_name)
+    if table_name == 'foreigntitles'
       title = Foreigntitle.where(title: @title).first
       if title == nil
         Foreigntitle.create(:title => @title, :asin => @asin)
       end
-    elsif tableName == 'japanesetitles'
+    elsif table_name == 'japanesetitles'
       title = Japanesetitle.where(title: @title).first
       if title == nil
         Japanesetitle.create(:title => @title, :asin => @asin)
@@ -72,27 +72,27 @@ end
 #
 # 映画タイトルのスクレイピング
 #
-def scrapeTitles(targetUrl, tableName)
+def scrape_info_from(target_url, table_name)
   charset = nil
-  html = open(targetUrl) do |f|
+  html = open(target_url) do |f|
     charset = f.charset
     f.read
   end
   doc = Nokogiri::HTML.parse(html, nil, charset)
-  numTitles = 1
+  num_titles = 1
   doc.xpath('//div[@class="productBox"]').each do |node|
     title = node.xpath('span[@class="productText"]/a').text
-    if title !~ /Blu\-ray/ && numTitles < MAX_TITLES
+    if title !~ /Blu\-ray/ && num_titles < MAX_TITLES
         movie = Movie.new(title)
-        movie.setAsin
+        movie.set_asin
         next if movie.asin == nil
-        movie.addToDB(tableName)
-        numTitles += 1
+        movie.add_to(table_name)
+        num_titles += 1
     end
   end
 end
 
 # 洋画のタイトルを取得
-scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
+scrape_info_from("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
 # 邦画のタイトルを取得
-scrapeTitles("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
+scrape_info_from("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")

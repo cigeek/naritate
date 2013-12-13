@@ -26,11 +26,11 @@
       <table class="table table-striped">
         <tr>
           <th class="rank">#</th>
-          <th class="ranktitle">タイトル</th>
-          <th class="rankscore">スキ！数</th>
+          <th class="rank-title">タイトル</th>
+          <th class="rank-score">スキ！数</th>
         </tr>
         <% rank = 1 %>
-        <% @favrank.each do |title| %>
+        <% @fav_ranks.each do |title| %>
         <tr>
           <td><%= rank.to_s %></td>
           <td><%= title["title"] %></td>
@@ -43,11 +43,11 @@
       <table class="table table-striped">
         <tr>
           <th class="rank">#</th>
-          <th class="ranktitle">タイトル</th>
-          <th class="rankscore">借りた数</th>
+          <th class="rank-title">タイトル</th>
+          <th class="rank-score">借りた数</th>
         </tr>
         <% rank = 1 %>
-        <% @timerank.each do |title| %>
+        <% @time_ranks.each do |title| %>
         <tr>
           <td><%= rank.to_s %></td>
           <td><%= title["title"] %></td>
