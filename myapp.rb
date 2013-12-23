@@ -35,6 +35,7 @@ get '/' do
   erb :index
 end
 
+# ==タイトル一覧== #
 # 洋画タイトル一覧
 get '/foreign' do
   @page_title = '洋画 - 旧作チェッカー『なりたてQ作』'
@@ -55,6 +56,7 @@ get '/japanese' do
   erb :japanese
 end
 
+# ==ランキング== #
 # 総合ランキング
 get '/ranking' do
   @page_title = '総合ランキング - 旧作チェッカー『なりたてQ作』'
@@ -94,6 +96,7 @@ end
 #=====#
 # API #
 #=====#
+# ==タイトル一覧== #
 # 洋画タイトル一覧
 get '/foreign.json' do
   content_type :json, :charset => 'utf-8'
@@ -108,6 +111,7 @@ get '/japanese.json' do
   titles.to_json(:root => false)
 end
 
+# ==ランキング== #
 # 総合ランキング
 get '/ranking.json' do
   content_type :json, :charset => 'utf-8'
@@ -132,34 +136,32 @@ end
 #=========#
 # 投票機能 #
 #=========#
-# favs数のインクリメント処理
-post '/fav/:table' do
-  # 洋画タイトル一覧からのpostだった場合
-  if params[:table] == 'fr'
-    title = Foreigntitle.find(params[:id])
-    title.favs += 1
-    title.save
-
-  # 邦画タイトル一覧からのpostだった場合
-  elsif params[:table] == 'jp'
-    title = Japanesetitle.find(params[:id])
-    title.favs += 1
-    title.save
-  end
+# ==スキ！== #
+# 洋画タイトルの投票処理
+post '/fav/fr' do
+  title = Foreigntitle.find(params[:id])
+  title.favs += 1
+  title.save
 end
 
-# times数のインクリメント処理
-post '/time/:table' do
-  # 洋画タイトル一覧からのpostだった場合
-  if params[:table] == 'fr'
-    title = Foreigntitle.find(params[:id])
-    title.times += 1
-    title.save
+# 邦画タイトルの投票処理
+post '/fav/jp' do
+  title = Japanesetitle.find(params[:id])
+  title.favs += 1
+  title.save
+end
 
-  # 邦画タイトル一覧からのpostだった場合
-  elsif params[:table] == 'jp'
-    title = Japanesetitle.find(params[:id])
-    title.times += 1
-    title.save
-  end
+# ==借りた！== #
+# 洋画タイトルの投票処理
+post '/time/fr' do
+  title = Foreigntitle.find(params[:id])
+  title.times += 1
+  title.save
+end
+
+# 邦画タイトルの投票処理
+post '/time/jp' do
+  title = Japanesetitle.find(params[:id])
+  title.times += 1
+  title.save
 end
