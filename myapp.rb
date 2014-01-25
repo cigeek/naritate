@@ -1,18 +1,14 @@
-#=========#
-# 初期設定 #
-#=========#
-# ==ライブラリ読み込み== #
+#== ライブラリ ==#
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
 
+#== 環境設定 ==#
 require './env'
 
-#========#
-# Web向け #
-#========#
+#== Web ==#
 # トップ画面
 get '/' do
   @page_title = '旧作チェッカー『なりたてQ作』'
@@ -20,12 +16,9 @@ get '/' do
   erb :index
 end
 
-# ==タイトル一覧== #
 # 洋画タイトル一覧
 get '/foreign' do
   @page_title = '洋画 - 旧作チェッカー『なりたてQ作』'
-
-  # foreignTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
   @foreign_titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).all
 
   erb :foreign
@@ -34,22 +27,19 @@ end
 # 邦画タイトル一覧
 get '/japanese' do
   @page_title = '邦画 - 旧作チェッカー『なりたてQ作』'
-
-  # japaneseTitlesテーブルから新しい順にMAX_TITLES件のレコードを取得
   @japanese_titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).all
 
   erb :japanese
 end
 
-# ==ランキング== #
 # 総合ランキング
 get '/ranking' do
   @page_title = '総合ランキング - 旧作チェッカー『なりたてQ作』'
 
-  # foreignTitles、japaneseTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @fav_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by favs desc, created_at desc limit #{MAX_RANK};")
-  # foreignTitles、japaneseTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @time_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by times desc, created_at desc limit #{MAX_RANK};")
+  # foreignTitles，japaneseTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
+  @fav_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, favs desc limit #{MAX_RANK};")
+  # foreignTitles，japaneseTitlesテーブルの中で最もtimes数の多いレコード最新5件を取得
+  @time_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, times desc limit #{MAX_RANK};")
 
   erb :ranking
 end
@@ -58,10 +48,10 @@ end
 get '/rankingfr' do
   @page_title = '洋画ランキング - 旧作チェッカー『なりたてQ作』'
 
-  # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @fav_ranks = Foreigntitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
-  # foreignTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @time_ranks = Foreigntitle.order("times desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
+  # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
+  @fav_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
+  # foreignTitlesテーブルの中で最もtimes数の多いレコード最新5件を取得
+  @time_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
 
   erb :rankingfr
 end
@@ -70,18 +60,15 @@ end
 get '/rankingjp' do
   @page_title = '邦画ランキング - 旧作チェッカー『なりたてQ作』'
 
-  # foreignTitlesテーブルの中で最もfav数の多いレコード5件を取得
-  @fav_ranks = Japanesetitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
-  # foreignTitlesテーブルの中で最もtimes数の多いレコード5件を取得
-  @time_ranks = Japanesetitle.order("times desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
+  # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
+  @fav_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
+  # foreignTitlesテーブルの中で最もtimes数の多いレコード最新5件を取得
+  @time_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
 
   erb :rankingjp
 end
 
-#=====#
-# API #
-#=====#
-# ==タイトル一覧== #
+#== API ==#
 # 洋画タイトル一覧
 get '/foreign.json' do
   content_type :json, :charset => 'utf-8'
@@ -96,7 +83,6 @@ get '/japanese.json' do
   titles.to_json(:root => false)
 end
 
-# ==ランキング== #
 # 総合ランキング
 get '/ranking.json' do
   content_type :json, :charset => 'utf-8'
@@ -118,10 +104,8 @@ get '/rankingjp.json' do
   titles.to_json(:root => false)
 end
 
-#=========#
-# 投票機能 #
-#=========#
-# ==スキ！== #
+#== 投票機能 ==#
+# スキ！
 # 洋画タイトルの投票処理
 post '/fav/fr' do
   title = Foreigntitle.find(params[:id])
@@ -136,7 +120,7 @@ post '/fav/jp' do
   title.save
 end
 
-# ==借りた！== #
+# 借りた！
 # 洋画タイトルの投票処理
 post '/time/fr' do
   title = Foreigntitle.find(params[:id])

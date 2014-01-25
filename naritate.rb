@@ -1,21 +1,20 @@
-# ライブラリの読み込み
+#== ライブラリ ==#
 require 'rubygems'
 require 'active_record'
 require 'open-uri'
 require 'nokogiri'
 require 'amazon/ecs'
 
-require './ecs'
+#== 環境設定 ==#
 require './env'
+require './ecs'
 
-#
-# Movieクラス
-#
+#== Movieクラス ==#
 class Movie
-  # Movieクラスインスタンスの初期化
+  # インスタンスの初期化
   def initialize(title)
     @title = title
-    @asin = nil
+    @asin = self.set_asin
   end
 
   # Amazon APIからASINを取得して設定
@@ -25,58 +24,73 @@ class Movie
     res = Amazon::Ecs.item_search(@title, {
       :search_index => 'DVD',
       :responce_group => 'Small',
-      :country => 'jp'}
-    )
+      :country => 'jp'
+    })
 
-    if res.items.length > 0 && res.items.first.get('ASIN').length > 8
+    if res.items.length > 0
       @asin = res.items.first.get('ASIN')
     else
       @asin = nil
     end
   end
 
-  # Movieクラスのインスタンスの情報をDBへ追加
-  def add_to(table_name)
-    if table_name == 'foreigntitles'
-      title = Foreigntitle.where(title: @title).first
-      if title == nil
-        Foreigntitle.create(:title => @title, :asin => @asin)
-      end
-    elsif table_name == 'japanesetitles'
-      title = Japanesetitle.where(title: @title).first
-      if title == nil
-        Japanesetitle.create(:title => @title, :asin => @asin)
-      end
+  # インスタンスの情報(ASIN)が有効かどうか判定
+  def valid?
+    if @asin.length > 8 && @asin != nil
+      return true
+    else
+      return false
     end
   end
 
-  attr_accessor :title, :asin
+  # DB上に既にタイトルが存在するか判定 
+  def exist_in?(table)
+    if table == 'fr'
+      res = Foreigntitle.where(title: @title).first
+    elsif table == 'jp'
+      res = Japanesetitle.where(title: @title).first
+    end
+
+    if res != nil
+      return true
+    else
+      return false
+    end
+  end
+
+  # インスタンスの情報をDBへ追加
+  def add_to(table)
+    if table == 'fr' && !(self.exist_in?('fr'))
+      Foreigntitle.create(:title => @title, :asin => @asin)
+    elsif table == 'jp' && !(self.exist_in?('jp'))
+      Japanesetitle.create(:title => @title, :asin => @asin)
+    end
+  end
 end
 
-#
-# 映画タイトルのスクレイピング
-#
-def scrape_info_from(target_url, table_name)
+#== 映画タイトルのスクレイピング ==#
+def scrape(target_url, table)
   charset = nil
-  html = open(target_url) do |f|
-    charset = f.charset
-    f.read
+  html = open(target_url) do |file|
+    charset = file.charset
+    file.read
   end
   doc = Nokogiri::HTML.parse(html, nil, charset)
-  num_titles = 1
-  doc.xpath('//div[@class="productBox"]').each do |node|
-    title = node.xpath('span[@class="productText"]/a').text
-    if title !~ /Blu\-ray/ && num_titles < MAX_TITLES
-        movie = Movie.new(title)
-        movie.set_asin
-        next if movie.asin == nil
-        movie.add_to(table_name)
-        num_titles += 1
+
+  count = 1
+  doc.xpath('//div[@class="productBox"]').each do |el|
+    title = el.xpath('span[@class="productText"]/a').text
+    if title !~ /Blu\-ray/ && count < MAX_TITLES
+      movie = Movie.new(title)
+      if movie.valid?
+        movie.add_to(table)
+        count += 1
+      end
     end
   end
 end
 
 # 洋画のタイトルを取得
-scrape_info_from("http://posren.livedoor.com/static/corner/old_now.html?id=1", "foreigntitles")
+scrape("http://posren.livedoor.com/static/corner/old_now.html?id=1", "fr")
 # 邦画のタイトルを取得
-scrape_info_from("http://posren.livedoor.com/static/corner/old_now.html?id=3", "japanesetitles")
+scrape("http://posren.livedoor.com/static/corner/old_now.html?id=3", "jp")
