@@ -5,24 +5,8 @@ require 'open-uri'
 require 'nokogiri'
 require 'amazon/ecs'
 
-# DB接続設定
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
-
-# 取得するタイトル数
-MAX_TITLES = 15
-
-# テーブルをクラス化
-class Foreigntitle < ActiveRecord::Base
-end
-class Japanesetitle < ActiveRecord::Base
-end
-
-# Amazon API接続設定
-Amazon::Ecs.options = {
-  :associate_tag => 'cigeek-22',
-  :AWS_access_key_id => 'AKIAJA6MN3AC3L2XZQJQ',
-  :AWS_secret_key => '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'
-}
+require './ecs'
+require './env'
 
 #
 # Movieクラス
