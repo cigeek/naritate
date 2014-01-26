@@ -7,7 +7,12 @@ require 'amazon/ecs'
 
 #== 環境設定 ==#
 require './env'
-require './ecs'
+# AWS接続設定
+Amazon::Ecs.options = {
+  :associate_tag => 'cigeek-22',
+  :AWS_access_key_id => ENV['AWS_ACCESSKEYID'],
+  :AWS_secret_key => ENV['AWS_SECRETKEY']
+}
 
 #== Movieクラス ==#
 class Movie
