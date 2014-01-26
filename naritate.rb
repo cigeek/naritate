@@ -19,7 +19,9 @@ class Movie
   # インスタンスの初期化
   def initialize(title)
     @title = title
-    @asin = self.set_asin
+    @asin = nil
+    
+    self.set_asin
   end
 
   # Amazon APIからASINを取得して設定
@@ -34,8 +36,6 @@ class Movie
 
     if res.items.length > 0
       @asin = res.items.first.get('ASIN')
-    else
-      @asin = nil
     end
   end
 
@@ -49,7 +49,7 @@ class Movie
   end
 
   # DB上に既にタイトルが存在するか判定 
-  def exist_in?(table)
+  def exist_on?(table)
     if table == 'fr'
       res = Foreigntitle.where(title: @title).first
     elsif table == 'jp'
@@ -65,9 +65,9 @@ class Movie
 
   # インスタンスの情報をDBへ追加
   def add_to(table)
-    if table == 'fr' && !(self.exist_in?('fr'))
+    if table == 'fr' && !(self.exist_on?('fr'))
       Foreigntitle.create(:title => @title, :asin => @asin)
-    elsif table == 'jp' && !(self.exist_in?('jp'))
+    elsif table == 'jp' && !(self.exist_on?('jp'))
       Japanesetitle.create(:title => @title, :asin => @asin)
     end
   end
