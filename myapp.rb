@@ -19,7 +19,7 @@ end
 # 洋画タイトル一覧
 get '/foreign' do
   @page_title = '洋画 - 旧作チェッカー『なりたてQ作』'
-  @foreign_titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).all
+  @foreign_titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
 
   erb :foreign
 end
@@ -27,7 +27,7 @@ end
 # 邦画タイトル一覧
 get '/japanese' do
   @page_title = '邦画 - 旧作チェッカー『なりたてQ作』'
-  @japanese_titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).all
+  @japanese_titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
 
   erb :japanese
 end
@@ -49,9 +49,9 @@ get '/rankingfr' do
   @page_title = '洋画ランキング - 旧作チェッカー『なりたてQ作』'
 
   # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
-  @fav_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
+  @fav_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).to_a
   # foreignTitlesテーブルの中で最もtimes数の多いレコード最新5件を取得
-  @time_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
+  @time_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).to_a
 
   erb :rankingfr
 end
@@ -61,9 +61,9 @@ get '/rankingjp' do
   @page_title = '邦画ランキング - 旧作チェッカー『なりたてQ作』'
 
   # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
-  @fav_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).all
+  @fav_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).to_a
   # foreignTitlesテーブルの中で最もtimes数の多いレコード最新5件を取得
-  @time_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).all
+  @time_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("times desc").limit(MAX_RANK).to_a
 
   erb :rankingjp
 end
@@ -72,14 +72,14 @@ end
 # 洋画タイトル一覧
 get '/foreign.json' do
   content_type :json, :charset => 'utf-8'
-  titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).all
+  titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
   titles.to_json(:root => false)
 end
 
 # 邦画タイトル一覧
 get '/japanese.json' do
   content_type :json, :charset => 'utf-8'
-  titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).all
+  titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
   titles.to_json(:root => false)
 end
 
@@ -93,14 +93,14 @@ end
 # 洋画ランキング
 get '/rankingfr.json' do
   content_type :json, :charset => 'utf-8'
-  titles = Foreigntitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
+  titles = Foreigntitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).to_a
   titles.to_json(:root => false)
 end
 
 # 邦画ランキング
 get '/rankingjp.json' do
   content_type :json, :charset => 'utf-8'
-  titles = Japanesetitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).all
+  titles = Japanesetitle.order("favs desc").limit(MAX_TITLES).order("created_at desc").limit(MAX_RANK).to_a
   titles.to_json(:root => false)
 end
 
