@@ -53,7 +53,7 @@ get '/ranking' do
   # foreignTitles，japaneseTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
   @fav_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, favs desc limit #{MAX_RANK};")
   # foreignTitles，japaneseTitlesテーブルの中で最もboos数の多いレコード最新5件を取得
-  @time_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, boos desc limit #{MAX_RANK};")
+  @boo_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by created_at desc, boos desc limit #{MAX_RANK};")
 
   erb :ranking
 end
@@ -65,7 +65,7 @@ get '/rankingfr' do
   # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
   @fav_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).to_a
   # foreignTitlesテーブルの中で最もboos数の多いレコード最新5件を取得
-  @time_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("boos desc").limit(MAX_RANK).to_a
+  @boo_ranks = Foreigntitle.order("created_at desc").limit(MAX_TITLES).order("boos desc").limit(MAX_RANK).to_a
 
   erb :rankingfr
 end
@@ -77,7 +77,7 @@ get '/rankingjp' do
   # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
   @fav_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("favs desc").limit(MAX_RANK).to_a
   # foreignTitlesテーブルの中で最もboos数の多いレコード最新5件を取得
-  @time_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("boos desc").limit(MAX_RANK).to_a
+  @boo_ranks = Japanesetitle.order("created_at desc").limit(MAX_TITLES).order("boos desc").limit(MAX_RANK).to_a
 
   erb :rankingjp
 end
@@ -134,16 +134,16 @@ post '/fav/jp' do
   title.save
 end
 
-# 借りた！
+# つまんない！
 # 洋画タイトルの投票処理
-post '/time/fr' do
+post '/boo/fr' do
   title = Foreigntitle.find(params[:id])
   title.boos += 1
   title.save
 end
 
 # 邦画タイトルの投票処理
-post '/time/jp' do
+post '/boo/jp' do
   title = Japanesetitle.find(params[:id])
   title.boos += 1
   title.save

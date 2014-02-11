@@ -39,15 +39,15 @@
         <% rank += 1 %>
         <% end %>
       </table>
-      <h3>借りたランキング</h3>
+      <h3>つまんないランキング</h3>
       <table class="table table-striped">
         <tr>
           <th class="rank">#</th>
           <th class="rank-title">タイトル</th>
-          <th class="rank-score">借りた数</th>
+          <th class="rank-score">つまんない数</th>
         </tr>
         <% rank = 1 %>
-        <% @time_ranks.each do |title| %>
+        <% @boo_ranks.each do |title| %>
         <tr>
           <td><%= rank.to_s %></td>
           <td><%= title.title %></td>
