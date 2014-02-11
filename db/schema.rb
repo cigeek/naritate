@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117135342) do
+ActiveRecord::Schema.define(version: 20140211134305) do
 
   create_table "foreigntitles", force: true do |t|
     t.string   "title",                  null: false
     t.string   "asin",                   null: false
     t.integer  "favs",       default: 0
-    t.integer  "times",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "boos",       default: 0
   end
 
   add_index "foreigntitles", ["asin"], name: "index_foreigntitles_on_asin", unique: true
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20131117135342) do
     t.string   "title"
     t.string   "asin"
     t.integer  "favs",       default: 0
-    t.integer  "times",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "boos",       default: 0
   end
 
   add_index "japanesetitles", ["asin"], name: "index_japanesetitles_on_asin", unique: true
