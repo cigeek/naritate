@@ -5,17 +5,8 @@
         <li><a href="/" title="ホーム"><span class="glyphicon glyphicon-home"></span> ホーム</a></li>
         <li class="active"><a href="/foreign"><span class="glyphicon glyphicon-film"></span> 洋画</a></li>
         <li><a href="/japanese"><span class="glyphicon glyphicon-film"></span> 邦画</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-stats"></span> ランキング<span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="/ranking">総合</a></li>
-            <li><a href="/rankingfr">洋画</a></li>
-            <li><a href="/rankingjp">邦画</a></li>
-          </ul>
-        </li><!--/.dropdown-->
-      </ul>
-    </div>
+        <li><a href="/ranking"><span class="glyphicon glyphicon-stats"></span> ランキング</a></li>
+    </div><!--./nav-tabs-->
   </div><!--./row-->
   <div class="row" id="thumbnails">
     <% @foreign_titles.each do |title| %>
@@ -29,8 +20,8 @@
           </p>
           <hr>
           <p class="text-center" id="<%= title.id %>">
-            <a type="button" class="btn btn-primary btn-sm favCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs.to_s %> )</a> 
-            <a type="button" class="btn btn-default btn-sm booCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> うーん ( <%= title.boos.to_s %> )</a>
+            <a type="button" class="btn btn-primary btn-sm favCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs %> )</a> 
+            <a type="button" class="btn btn-default btn-sm booCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> うーん ( <%= title.boos %> )</a>
           </p>
         </div>
       </div>
