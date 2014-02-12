@@ -134,7 +134,7 @@ post '/fav/jp' do
   title.save
 end
 
-# つまんない！
+# うーん
 # 洋画タイトルの投票処理
 post '/boo/fr' do
   title = Foreigntitle.find(params[:id])

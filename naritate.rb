@@ -15,13 +15,6 @@ end
 class Japanesetitle < ActiveRecord::Base
 end
 
-#== 定数 ==#
-# 一覧表示するレコードの件数
-MAX_TITLES = 18
-
-# ランキング表示するレコードの件数
-MAX_RANK = 5
-
 # AWS接続設定
 Amazon::Ecs.options = {
   :associate_tag => 'cigeek-22',
@@ -97,14 +90,12 @@ def scrape(target_url, table)
   end
   doc = Nokogiri::HTML.parse(html, nil, charset)
 
-  count = 1
   doc.xpath('//div[@class="productBox"]').each do |el|
     title = el.xpath('span[@class="productText"]/a').text
-    if title !~ /Blu\-ray/ && count < MAX_TITLES
+    if title !~ /Blu\-ray/
       movie = Movie.new(title)
       if movie.valid?
         movie.add_to(table)
-        count += 1
       end
     end
   end
