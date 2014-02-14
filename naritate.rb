@@ -34,7 +34,7 @@ class Movie
 
   # Amazon APIからASINを取得して設定
   def set_asin
-    sleep 0.5
+    sleep 1
 
     res = Amazon::Ecs.item_search(@title, {
       :search_index => 'DVD',
