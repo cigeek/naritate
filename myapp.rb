@@ -33,7 +33,7 @@ end
 # 洋画タイトル一覧
 get '/foreign' do
   @page_title = '洋画 - 旧作チェッカー『なりたてQ作』'
-  @foreign_titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
+  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
 
   erb :foreign
 end
@@ -41,15 +41,23 @@ end
 # 邦画タイトル一覧
 get '/japanese' do
   @page_title = '邦画 - 旧作チェッカー『なりたてQ作』'
-  @japanese_titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
+  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
 
   erb :japanese
+end
+
+# 人気タイトル
+get '/hot' do
+  @page_title = '人気 - 旧作チェッカー『なりたてQ作』'
+  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
+  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
+
+  erb :hot
 end
 
 # 総合ランキング
 get '/ranking' do
   @page_title = '総合ランキング - 旧作チェッカー『なりたてQ作』'
-
   # foreignTitles，japaneseTitlesテーブルの中で最もfav数の多いレコード最新5件を取得
   @fav_ranks = ActiveRecord::Base.connection.execute("select * from foreigntitles union select * from japanesetitles order by favs desc, created_at limit #{MAX_RANK};")
   # foreignTitlesテーブルの中で最もfav数の多いレコード最新5件を取得

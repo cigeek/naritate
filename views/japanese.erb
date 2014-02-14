@@ -5,12 +5,12 @@
         <li><a href="/" title="ホーム"><span class="glyphicon glyphicon-home"></span> ホーム</a></li>
         <li><a href="/foreign"><span class="glyphicon glyphicon-film"></span> 洋画</a></li>
         <li  class="active"><a href="/japanese"><span class="glyphicon glyphicon-film"></span> 邦画</a></li>
-        <li><a href="/ranking"><span class="glyphicon glyphicon-stats"></span> ランキング</a></li>
+        <li><a href="/hot"><span class="glyphicon glyphicon-fire"></span> 人気</a></li>
       </ul>
-    </div><!--/.nav-tabs-->.
+    </div><!--/.nav-tabs-->
   </div><!--/.row-->
   <div class="row" id="thumbnails">
-    <% @japanese_titles.each do |title| %>
+    <% @jp_latest.each do |title| %>
     <div class="thumb col-lg-3 col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
         <img alt="<%= title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= title.asin %>&Format=_SL450_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1">
@@ -21,7 +21,7 @@
           </p>
           <hr>
           <p class="text-center" id="<%= title.id %>">
-            <a type="button" class="btn btn-primary btn-sm favCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs %> )</a> 
+            <a type="button" class="btn btn-primary btn-sm favCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= title.favs %> )</a>
             <a type="button" class="btn btn-default btn-sm booCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> うーん ( <%= title.boos %> )</a>
           </p>
         </div>

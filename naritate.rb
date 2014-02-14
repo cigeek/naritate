@@ -28,7 +28,7 @@ class Movie
   def initialize(title)
     @title = title
     @asin = nil
-    
+
     self.set_asin
   end
 
@@ -49,14 +49,14 @@ class Movie
 
   # インスタンスの情報(ASIN)が有効かどうか判定
   def valid?
-    if @asin.length > 8 && @asin != nil
+    if @asin != nil
       return true
     else
       return false
     end
   end
 
-  # DB上に既にタイトルが存在するか判定 
+  # DB上に既にタイトルが存在するか判定
   def exist_on?(table)
     if table == 'fr'
       res = Foreigntitle.where(title: @title).first
