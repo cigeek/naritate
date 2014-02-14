@@ -1,9 +1,11 @@
-ruby '2.1.0'
 source 'https://rubygems.org'
+ruby '2.1.0'
 
 gem 'sinatra'
-gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
+gem 'rake'
 gem 'activerecord'
+gem 'activesupport', :require => 'activesupport/all'
+gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'nokogiri'
 gem 'amazon-ecs'
 
