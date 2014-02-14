@@ -15,6 +15,9 @@
       <div class="thumbnail">
         <img alt="<%= title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= title.asin %>&Format=_SL450_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1">
         <div class="caption">
+          <% if title.picked %>
+          <span class="label label-danger">おすすめ</span>
+          <% end %>
           <h4 class="text-center"><%= title.title %></h4>
           <p class="text-center">
             <a href="http://www.amazon.co.jp/dp/product-description/<%= title.asin %>/?tag=cigeek-22">詳細</a> | <a href="http://www.amazon.co.jp/product-reviews/<%= title.asin %>/?tag=cigeek-22">レビュー</a> | <a href="http://twitter.com/share?text=『<%= title.title %>』%23なりたてQ作&url=http://www.amazon.co.jp/dp/product-description/<%= title.asin %>/?tag=cigeek-22" target="_blank">シェア</a>
