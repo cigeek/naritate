@@ -26,8 +26,10 @@ MAX_RANK = 5
 # トップ画面
 get '/' do
   @page_title = '旧作チェッカー『なりたてQ作』'
+  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
+  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
 
-  erb :index
+  erb :hot
 end
 
 # 洋画タイトル一覧
@@ -46,13 +48,10 @@ get '/japanese' do
   erb :japanese
 end
 
-# 人気タイトル
-get '/hot' do
-  @page_title = '人気 - 旧作チェッカー『なりたてQ作』'
-  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
-  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
+get '/about' do
+  @page_title = '本サービスについて - 旧作チェッカー『なりたてQ作』'
 
-  erb :hot
+  erb :index
 end
 
 #== API ==#
