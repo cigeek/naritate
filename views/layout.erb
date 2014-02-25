@@ -27,53 +27,51 @@
 		<script src="js/html5shiv.js"></script>
    <![endif]-->
    <!--Google Analitycs-->
-  <script>
+   <script>
     (function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-44891792-1","kosk.me");ga("send","pageview");
   </script>
   <!--nend-->
   <script type="text/javascript">
-var nend_params = {"media":13465,"site":62738,"spot":141582,"type":2,"oriented":1};
+    var nend_params = {"media":13465,"site":62738,"spot":141582,"type":2,"oriented":1};
   </script>
   <script type="text/javascript" src="http://js1.nend.net/js/nendAdLoader.js"></script>
 </head>
 <body>
 	<div id="wrapper">
-   <!--Fixed navbar-->
-   <div class="navbar navbar-default navbar-fixed-top">
-     <div class="container">
-      <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#wrapper">なりたてQ作</a>
-    </div>
-    <div class="navbar-collapse collapse">
-     <ul class="nav navbar-nav navbar-right">
-      <li><a href="http://twitter.com/share?original_referer=http://naritate.kosk.me/&text=なりたてQ作〜映画選びのお供に〜&url=http://naritate.kosk.me/&via=_cigeek" onClick="window.open(this.href, 'tweetwindow', 'width=550, height=450,personalbar=0,toolbar=0,scrollbars=1,resizable=1');return false;"><span class="glyphicon glyphicon-heart"></span> 皆に教える</a></li>
-      <li class="dropdown"><a href="#" title="リンク" class="dropdown-toggle" data-toggle="dropdown">リンク<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-         <li><a href="http://blog.kosk.me/" title="ブログ"><span class="glyphicon glyphicon-user"></span> ブログ</a></li>
-       </ul>
-     </div><!--/.nav-collapse-->
-   </div><!--/.container-->
- </div><!--/.navbar-header-->
- <!--Contents -->
- <%= yield %>
-</div><!--/.wrapper-->
-<!--Footer -->
-<div id="footer">
- <div class="container">
-   <p class="text-muted credit">Created by <a href="http://twitter.com/_cigeek">kosk</a>.</p>
- </div>
-</div>
-<script src="//cdn.jsdelivr.net/masonry/3.1.4/masonry.min.js"></script>
-<script src="//cdn.jsdelivr.net/imagesloaded/3.1.4/imagesloaded.min.js"></script>
-<script src="js/naritate.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script>
-  $(document).ready(function(){var a=$(window).width();if(a<768){$(".nav-tabs").removeClass("nav-justified")}});
-</script>
+    <!--Fixed navbar-->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#wrapper">なりたてQ作</a>
+        </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="http://twitter.com/share?original_referer=http://naritate.kosk.me/&text=なりたてQ作〜映画選びのお供に〜&url=http://naritate.kosk.me/&via=_cigeek" onClick="window.open(this.href, 'tweetwindow', 'width=550, height=450,personalbar=0,toolbar=0,scrollbars=1,resizable=1');return false;"><span class="glyphicon glyphicon-heart"></span> 皆に教える</a></li>
+          <li class="dropdown"><a href="#" title="リンク" class="dropdown-toggle" data-toggle="dropdown">リンク<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://blog.kosk.me/" title="ブログ"><span class="glyphicon glyphicon-user"></span> ブログ</a></li>
+          </ul>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse-->
+    </div><!--/.container-->
+  </div><!--/.navbar-header-->
+  <%= yield %>
+  </div><!--/.wrapper-->
+  <!--Footer -->
+  <div id="footer">
+   <div class="container">
+     <p class="text-muted credit">Created by <a href="http://twitter.com/_cigeek">kosk</a>.</p>
+   </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/masonry/3.1.2/masonry.min.js"></script>
+  <script src="//cdn.jsdelivr.net/imagesloaded/3.0.4/imagesloaded.pkgd.js"></script>
+  <script src="js/naritate.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 </body>
 </html>

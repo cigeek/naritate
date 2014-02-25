@@ -1,5 +1,8 @@
 $(document).ready(function(){
-  var a=$("#thumbnails");
+  if ($(window).width()<900){
+    $(".nav-tabs").removeClass("nav-justified")
+  }
+  var a=$(".thumbnails");
   a.imagesLoaded(function(){
     a.masonry({
       columnWidth:".thumb",
