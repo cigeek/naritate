@@ -5,6 +5,12 @@ require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
 
+#== エスケープ設定 ==#
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+end
+
 #== データベース環境設定 ==#
 # データベース接続
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
