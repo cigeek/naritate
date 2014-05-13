@@ -103,5 +103,6 @@ end
 
 # 洋画のタイトルを取得
 scrape("http://posren.livedoor.com/static/corner/old_now.html?id=1", "fr")
+scrape("http://posren.com/static/corner/old_now.html?p=2&id=1", "fr")
 # 邦画のタイトルを取得
 scrape("http://posren.livedoor.com/static/corner/old_now.html?id=3", "jp")
