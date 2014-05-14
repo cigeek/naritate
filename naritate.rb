@@ -28,36 +28,30 @@ class Movie
   def initialize(title)
     @title = title
     @asin = nil
-
-    self.set_asin
   end
 
   # Amazon APIからASINを取得して設定
   def set_asin
-    sleep 1
-
     res = Amazon::Ecs.item_search(@title, {
       :search_index => 'DVD',
       :responce_group => 'Small',
       :country => 'jp'
     })
 
+    sleep 10
+
     if res.items.length > 0
       @asin = res.items.first.get('ASIN')
-    end
-  end
-
-  # インスタンスの情報(ASIN)が有効かどうか判定
-  def valid?
-    if @asin != nil
       return true
-    else
-      return false
     end
+
+    return false
   end
 
   # DB上に既にタイトルが存在するか判定
-  def exist_on?(table)
+  def already_exists?(table)
+    res = nil
+
     if table == 'fr'
       res = Foreigntitle.where(title: @title).first
     elsif table == 'jp'
@@ -73,9 +67,9 @@ class Movie
 
   # インスタンスの情報をDBへ追加
   def add_to(table)
-    if table == 'fr' && !(self.exist_on?('fr'))
+    if table == 'fr'
       Foreigntitle.create(:title => @title, :asin => @asin)
-    elsif table == 'jp' && !(self.exist_on?('jp'))
+    elsif table == 'jp'
       Japanesetitle.create(:title => @title, :asin => @asin)
     end
   end
@@ -83,6 +77,7 @@ end
 
 #== 映画タイトルのスクレイピング ==#
 def scrape(target_url, table)
+  # ターゲットのHTMLを取得・パース
   charset = nil
   html = open(target_url) do |file|
     charset = file.charset
@@ -90,19 +85,27 @@ def scrape(target_url, table)
   end
   doc = Nokogiri::HTML.parse(html, nil, charset)
 
+  # 抽出したタイトル情報に対しての処理
   doc.xpath('//div[@class="productBox"]').each do |el|
     title = el.xpath('span[@class="productText"]/a').text
+
     if title !~ /Blu\-ray/
       movie = Movie.new(title)
-      if movie.valid?
-        movie.add_to(table)
+      # DB上にまだ存在しなければ，ASINをセットしてDBに追加
+      unless movie.already_exists?(table)
+        movie.add_to(table) if movie.set_asin
+        
+        puts "#{title} is added"
       end
     end
   end
+
+  puts "Done: #{target_url}"
 end
 
 # 洋画のタイトルを取得
-scrape("http://posren.livedoor.com/static/corner/old_now.html?id=1", "fr")
-scrape("http://posren.com/static/corner/old_now.html?p=2&id=1", "fr")
+scrape("http://posren.com/static/corner/old_now.html?id=1", "fr")
+scrape("http://posren.com/static/corner/old_now.html?id=1&p=2", "fr")
 # 邦画のタイトルを取得
-scrape("http://posren.livedoor.com/static/corner/old_now.html?id=3", "jp")
+scrape("http://posren.com/static/corner/old_now.html?id=3", "jp")
+scrape("http://posren.com/static/corner/old_now.html?id=3&p=2", "jp")
