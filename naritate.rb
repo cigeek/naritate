@@ -94,7 +94,7 @@ def scrape(target_url, table)
       # DB上にまだ存在しなければ，ASINをセットしてDBに追加
       unless movie.already_exists?(table)
         movie.add_to(table) if movie.set_asin
-        
+
         puts "#{title} is added"
       end
     end
@@ -102,10 +102,3 @@ def scrape(target_url, table)
 
   puts "Done: #{target_url}"
 end
-
-# 洋画のタイトルを取得
-scrape("http://posren.com/static/corner/old_now.html?id=1", "fr")
-scrape("http://posren.com/static/corner/old_now.html?id=1&p=2", "fr")
-# 邦画のタイトルを取得
-scrape("http://posren.com/static/corner/old_now.html?id=3", "jp")
-scrape("http://posren.com/static/corner/old_now.html?id=3&p=2", "jp")
