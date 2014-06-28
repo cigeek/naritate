@@ -4,6 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
+require 'json'
 
 #== エスケープ設定 ==#
 helpers do
@@ -92,7 +93,7 @@ post '/fav/' do
 end
 
 # うーん
-post '/boo/fr' do
+post '/boo/' do
   case params['q']
   when "fr"
     title = Foreigntitle.find(params[:id])
