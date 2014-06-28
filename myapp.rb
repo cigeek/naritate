@@ -1,10 +1,10 @@
 #== ライブラリ ==#
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/json'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
-require 'json'
 
 #== エスケープ設定 ==#
 helpers do
@@ -64,16 +64,14 @@ end
 #== API ==#
 # 洋画タイトル一覧
 get '/foreign.json' do
-  content_type :json, :charset => 'utf-8'
   titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
-  titles.to_json(:root => false)
+  json titles, :content_type => :js, :charset => 'utf-8'
 end
 
 # 邦画タイトル一覧
 get '/japanese.json' do
-  content_type :json, :charset => 'utf-8'
   titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
-  titles.to_json(:root => false)
+  json titles, :content_type => :js, :charset => 'utf-8'
 end
 
 #== 投票機能 ==#
