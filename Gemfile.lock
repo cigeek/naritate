@@ -71,5 +71,6 @@ DEPENDENCIES
   rake
   sinatra
   sinatra-activerecord
+  sinatra-contrib
   sinatra-reloader
   sqlite3

@@ -65,13 +65,13 @@ end
 # 洋画タイトル一覧
 get '/foreign.json' do
   titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
-  json titles, :content_type => :js, :charset => 'utf-8'
+  json titles, :content_type => :js
 end
 
 # 邦画タイトル一覧
 get '/japanese.json' do
   titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
-  json titles, :content_type => :js, :charset => 'utf-8'
+  json titles, :content_type => :js
 end
 
 #== 投票機能 ==#
