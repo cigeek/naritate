@@ -6,11 +6,14 @@ require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
 
-#== エスケープ設定 ==#
+#== ヘルパー ==#
+# エスケープ
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
 end
+# JSON
+helpers Sinatra::JSON
 
 #== データベース環境設定 ==#
 # データベース接続
@@ -82,8 +85,6 @@ post '/fav/' do
     title = Foreigntitle.find(params[:id])
   when "jp"
     title = Japanesetitle.find(params[:id])
-  else
-    break
   end
 
   title.favs += 1
@@ -97,8 +98,6 @@ post '/boo/' do
     title = Foreigntitle.find(params[:id])
   when "jp"
     title = Japanesetitle.find(params[:id])
-  else
-    break
   end
 
   title.boos += 1
