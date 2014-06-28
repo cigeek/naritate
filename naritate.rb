@@ -52,9 +52,10 @@ class Movie
   def already_exists?(table)
     res = nil
 
-    if table == 'fr'
+    case table
+    when 'fr'
       res = Foreigntitle.where(title: @title).first
-    elsif table == 'jp'
+    when 'jp'
       res = Japanesetitle.where(title: @title).first
     end
 
@@ -67,9 +68,10 @@ class Movie
 
   # インスタンスの情報をDBへ追加
   def add_to(table)
-    if table == 'fr'
+    case table
+    when 'fr'
       Foreigntitle.create(:title => @title, :asin => @asin)
-    elsif table == 'jp'
+    when 'jp'
       Japanesetitle.create(:title => @title, :asin => @asin)
     end
   end
@@ -102,3 +104,10 @@ def scrape(target_url, table)
 
   puts "Done: #{target_url}"
 end
+
+# 洋画の新着情報
+scrape('http://posren.com/static/corner/old_now.html?p=1&id=1', 'fr')
+scrape('http://posren.com/static/corner/old_now.html?p=2&id=1', 'fr')
+# 邦画の新着情報
+scrape('http://posren.com/static/corner/old_now.html?p=1&id=3', 'jp')
+scrape('http://posren.com/static/corner/old_now.html?p=2&id=3', 'jp')
