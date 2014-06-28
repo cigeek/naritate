@@ -77,31 +77,31 @@ end
 
 #== 投票機能 ==#
 # スキ！
-# 洋画タイトルの投票処理
-post '/fav/fr' do
-  title = Foreigntitle.find(params[:id])
-  title.favs += 1
-  title.save
-end
+post '/fav/' do
+  case params['q']
+  when "fr"
+    title = Foreigntitle.find(params[:id])
+  when "jp"
+    title = Japanesetitle.find(params[:id])
+  else
+    break
+  end
 
-# 邦画タイトルの投票処理
-post '/fav/jp' do
-  title = Japanesetitle.find(params[:id])
   title.favs += 1
   title.save
 end
 
 # うーん
-# 洋画タイトルの投票処理
 post '/boo/fr' do
-  title = Foreigntitle.find(params[:id])
-  title.boos += 1
-  title.save
-end
+  case params['q']
+  when "fr"
+    title = Foreigntitle.find(params[:id])
+  when "jp"
+    title = Japanesetitle.find(params[:id])
+  else
+    break
+  end
 
-# 邦画タイトルの投票処理
-post '/boo/jp' do
-  title = Japanesetitle.find(params[:id])
   title.boos += 1
   title.save
 end
