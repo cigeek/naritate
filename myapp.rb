@@ -77,6 +77,14 @@ get '/about' do
 end
 
 #== API ==#
+# 人気タイトル
+get '/api/hot.json' do
+  titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).where("favs > 0").to_a
+  titles += Japanesetitle.order("created_at desc").limit(MAX_TITLES).where("favs > 0").to_a
+
+  json titles
+end
+
 # 洋画タイトル一覧
 get '/api/foreign.json' do
   titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
