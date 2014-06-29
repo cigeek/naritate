@@ -3,6 +3,7 @@ ruby '2.1.2'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'rack-cors'
 gem 'rake'
 gem 'activerecord'
 gem 'activesupport', :require => 'activesupport/all'

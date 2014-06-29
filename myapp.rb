@@ -5,6 +5,7 @@ require 'sinatra/json'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
+require 'rack/cors'
 
 #== ヘルパー ==#
 # エスケープ
@@ -23,6 +24,17 @@ ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localh
 class Foreigntitle < ActiveRecord::Base
 end
 class Japanesetitle < ActiveRecord::Base
+end
+
+# CORS for FxOS Client
+use Rack::Cors do
+  allow do
+    origins /^app:\/\/*/
+    resource '/api/*',
+      :methods => :get,
+      :headers => :any,
+      :max_age => 0
+  end
 end
 
 #== 定数 ==#
@@ -66,13 +78,13 @@ end
 
 #== API ==#
 # 洋画タイトル一覧
-get '/foreign.json' do
+get '/api/foreign.json' do
   titles = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
   json titles
 end
 
 # 邦画タイトル一覧
-get '/japanese.json' do
+get '/api/japanese.json' do
   titles = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
   json titles
 end
