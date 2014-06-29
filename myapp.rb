@@ -29,7 +29,7 @@ end
 # CORS for FxOS Client
 use Rack::Cors do
   allow do
-    origins /^app:\/\/*/
+    origins '*'
     resource '/api/*',
       :methods => :get,
       :headers => :any,
