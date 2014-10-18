@@ -100,7 +100,7 @@ def scrape(target_url, table)
 end
 
 def send_yo
-  res = Net::HTTP.post_form(URI.parse('https://api.justyo.co/yo/'), {
+  res = Net::HTTP.post_form(URI.parse('https://api.justyo.co/yoall'), {
     'api_token' => ENV['YO_TOKEN'],
     'link' => 'http://naritate.kosk.me'
     })
