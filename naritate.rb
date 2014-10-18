@@ -100,11 +100,12 @@ def scrape(target_url, table)
 end
 
 def send_yo
-  Net::HTTP.post_form(URI.parse('http://api.justyo.co/yo'), {
+  Net::HTTP.post_form(URI.parse('https://api.justyo.co/yo/'), {
     'api_token' => ENV['YO_TOKEN'],
     'link' => 'http://naritate.kosk.me'
-    }
-  )
+    })
+
+  puts "Yo sent"
 end
 
 # 洋画の新着情報
