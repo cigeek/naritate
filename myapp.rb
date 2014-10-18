@@ -5,7 +5,6 @@ require 'sinatra/json'
 require 'sinatra/reloader' if development?
 require 'active_record'
 require 'sinatra/activerecord'
-require 'rack/cors'
 
 #== ヘルパー ==#
 # エスケープ
@@ -26,17 +25,6 @@ end
 class Japanesetitle < ActiveRecord::Base
 end
 
-# CORS for FxOS Client
-use Rack::Cors do
-  allow do
-    origins '*'
-    resource '/api/*',
-      :methods => :get,
-      :headers => :any,
-      :max_age => 0
-  end
-end
-
 #== 定数 ==#
 # 一覧表示するレコードの件数
 MAX_TITLES = 18
@@ -48,8 +36,8 @@ MAX_RANK = 5
 # トップ画面
 get '/' do
   @page_title = '旧作チェッカー『なりたてQ作』'
-  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES).to_a
-  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES).to_a
+  @fr_latest = Foreigntitle.order("created_at desc").limit(MAX_TITLES / 2).where("favs > 0").to_a
+  @jp_latest = Japanesetitle.order("created_at desc").limit(MAX_TITLES / 2).where("favs > 0").to_a
 
   erb :hot
 end
