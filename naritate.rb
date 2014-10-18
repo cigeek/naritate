@@ -1,15 +1,13 @@
-#== ライブラリ ==#
 require 'rubygems'
 require 'active_record'
 require 'open-uri'
 require 'nokogiri'
 require 'amazon/ecs'
+require 'net/http'
 
-#== データベース環境設定 ==#
 # データベース接続
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/db/dev.db')
 
-# テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
 end
 class Japanesetitle < ActiveRecord::Base
@@ -22,9 +20,7 @@ Amazon::Ecs.options = {
   :AWS_secret_key => ENV['AWS_SECRETKEY']
 }
 
-#== Movieクラス ==#
 class Movie
-  # インスタンスの初期化
   def initialize(title)
     @title = title
     @asin = nil
@@ -38,7 +34,7 @@ class Movie
       :country => 'jp'
     })
 
-    sleep 10
+    sleep 15 # 規制回避
 
     if res.items.length > 0
       @asin = res.items.first.get('ASIN')
@@ -59,11 +55,7 @@ class Movie
       res = Japanesetitle.where(title: @title).first
     end
 
-    if res != nil
-      return true
-    else
-      return false
-    end
+    res != nil
   end
 
   # インスタンスの情報をDBへ追加
@@ -88,26 +80,38 @@ def scrape(target_url, table)
   doc = Nokogiri::HTML.parse(html, nil, charset)
 
   # 抽出したタイトル情報に対しての処理
+  cnt = 0
   doc.xpath('//div[@class="productBox"]').each do |el|
     title = el.xpath('span[@class="productText"]/a').text
 
     if title !~ /Blu\-ray/
       movie = Movie.new(title)
-      # DB上にまだ存在しなければ，ASINをセットしてDBに追加
       unless movie.already_exists?(table)
         movie.add_to(table) if movie.set_asin
 
         puts "#{title} is added"
+        cnt += 1
       end
     end
   end
 
   puts "Done: #{target_url}"
+  cnt
+end
+
+def send_yo
+  Net::HTTP.post_form(URI.parse('http://api.justyo.co/yo'), {
+    'api_token' => ENV['YO_TOKEN'],
+    'link' => 'http://naritate.kosk.me'
+    }
+  )
 end
 
 # 洋画の新着情報
-scrape('http://posren.com/static/corner/old_now.html?p=1&id=1', 'fr')
-scrape('http://posren.com/static/corner/old_now.html?p=2&id=1', 'fr')
+new_title = scrape('http://posren.com/static/corner/old_now.html?p=1&id=1', 'fr')
+new_title += scrape('http://posren.com/static/corner/old_now.html?p=2&id=1', 'fr')
 # 邦画の新着情報
-scrape('http://posren.com/static/corner/old_now.html?p=1&id=3', 'jp')
-scrape('http://posren.com/static/corner/old_now.html?p=2&id=3', 'jp')
+new_title += scrape('http://posren.com/static/corner/old_now.html?p=1&id=3', 'jp')
+new_title += scrape('http://posren.com/static/corner/old_now.html?p=2&id=3', 'jp')
+
+send_yo if new_title > 0

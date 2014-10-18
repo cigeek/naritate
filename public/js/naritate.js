@@ -1,3 +1,7 @@
+var _yoData={
+  "username":"NARITATEQ",
+  "trigger":"we got NEW MOVIES"
+};
 $(document).ready(function(){
   if ($(window).width()<900){
     $(".nav-tabs").removeClass("nav-justified")
@@ -9,6 +13,11 @@ $(document).ready(function(){
       itemSelector:".thumb"
     })
   })
+
+  var s=document.createElement("script");
+  s.type="text/javascript";
+  s.src="//yoapp.s3.amazonaws.com/js/yo-button.js";
+  (document.head||document.getElementsByTagName("head")[0]).appendChild(s);
 });
 $(".favCmdFr").click(function(){
   var a=$(this).parent().attr("id");

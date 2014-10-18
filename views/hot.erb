@@ -11,12 +11,22 @@
   <div id="mov">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="alert alert-info" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <div id="yo-button"></div>
+          <p class="text-center"><strong>Yo!</strong>で通知を受け取りませんか?</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <% if @fr_latest.present? %>
         <h2>洋画</h2>
+        <% end %>
         <hr>
       </div>
       <div class="thumbnails">
         <% @fr_latest.each do |title| %>
-        <% if title.favs > 0 %>
         <div class="thumb col-lg-3 col-md-3 col-sm-4 col-xs-6">
           <div class="thumbnail">
             <img alt="<%= h title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= h title.asin %>&Format=_SL400_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1">
@@ -30,24 +40,24 @@
               </p>
               <hr>
               <p class="text-center buttons" id="<%= h title.id %>">
-                <a type="button" class="btn btn-primary btn-sm favCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= h title.favs %> )</a> 
+                <a type="button" class="btn btn-primary btn-sm favCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= h title.favs %> )</a>
                 <a type="button" class="btn btn-default btn-sm booCmdFr" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> うーん ( <%= h title.boos %> )</a>
               </p>
             </div>
           </div>
         </div>
         <% end %>
-        <% end %>
       </div>
     </div><!--/.row fr-->
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <% if @jp_latest.present? %>
         <h2>邦画</h2>
+        <% end %>
         <hr>
       </div>
       <div class="thumbnails">
         <% @jp_latest.each do |title| %>
-        <% if title.favs > 0 %>
         <div class="thumb col-lg-3 col-md-3 col-sm-4 col-xs-6">
           <div class="thumbnail">
             <img alt="<%= h title.title %>" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=<%= h title.asin %>&Format=_SL400_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1">
@@ -61,13 +71,12 @@
               </p>
               <hr>
               <p class="text-center buttons" id="<%= h title.id %>">
-                <a type="button" class="btn btn-primary btn-sm favCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= h title.favs %> )</a> 
+                <a type="button" class="btn btn-primary btn-sm favCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-up"></span> スキ！ ( <%= h title.favs %> )</a>
                 <a type="button" class="btn btn-default btn-sm booCmdJp" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> うーん ( <%= h title.boos %> )</a>
               </p>
             </div>
           </div>
         </div>
-        <% end %>
         <% end %>
       </div>
     </div><!--/.row jp-->
