@@ -7,7 +7,7 @@ require 'amazon/ecs'
 
 #== データベース環境設定 ==#
 # データベース接続
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/dev.db')
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'sqlite3://localhost/db/dev.db')
 
 # テーブルをクラス化
 class Foreigntitle < ActiveRecord::Base
