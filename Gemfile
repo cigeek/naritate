@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
+ENV['NOKOGIRI_USE_SYSTEM_LIBRARIES'] = 'YES'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
@@ -18,4 +19,5 @@ end
 
 group :production do
   gem 'pg'
+	gem 'newrelic_rpm'
 end
